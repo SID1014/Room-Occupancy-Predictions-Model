@@ -18,7 +18,7 @@ st.title("Original Model Test")
 
 try:
     # Now, try to load your original, complex model
-    original_model = joblib.load('Mulit_Modle_Pipeline.joblib') # Make sure filename is correct
+    original_model = joblib.load('Multi_Modle_Pipeline.joblib') # Make sure filename is correct
     st.success("Success! The original pipeline loaded correctly.")
     st.write(original_model)
 except Exception as e:
