@@ -5,7 +5,7 @@ st.title("Model Loading Test")
 
 try:
     # Try to load the simple model
-    simple_model = joblib.load('simple_model.joblib')
+    simple_model = joblib.load('model_with_columntransformer.joblib')
     st.success("Success! The simple_model.joblib file loaded correctly.")
     st.write(simple_model)
 except Exception as e:
