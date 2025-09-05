@@ -2,14 +2,16 @@ import streamlit as st
 import joblib
 import pandas as pd
 import numpy as np
-
+import json
 
 st.header('Room Occupacy Detection')
 st.title('Multivariate Model')
 
 def multi_model():
-    pipeline = joblib.load('Multi_Modle_Pipeline.joblib')
-    return pipeline
+    pipeline = joblib.load('final_model_robust.joblib')
+    with open('training_columns.json', 'r') as f:
+        columns = json.load(f)
+    return pipeline, columns
 
 multi_model_pipeline = multi_model()
 
