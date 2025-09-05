@@ -1,24 +1,26 @@
+import streamlit as st
 import joblib
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
 
-# A very simple pipeline with only standard sklearn components
-# NO SMOTE, NO ColumnTransformer for this test.
-simple_pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier(random_state=42))
-])
+st.title("Model Loading Test")
 
-# Use only the numerical features from your training data for this test
-simple_features = ['S1_Temp', 'S2_Temp', 'S3_Temp', 'S4_Temp', 'S1_Light', 
-                 'S2_Light', 'S3_Light', 'S1_Sound', 'S2_Sound', 'S3_Sound', 
-                 'S5_CO2', 'S5_CO2_Slope']
+try:
+    # Try to load the simple model
+    simple_model = joblib.load('simple_model.joblib')
+    st.success("Success! The simple_model.joblib file loaded correctly.")
+    st.write(simple_model)
+except Exception as e:
+    st.error("Failed to load simple_model.joblib.")
+    st.exception(e)
 
-# Train this simple pipeline
-simple_pipeline.fit(X_train[simple_features], y_train)
+st.divider()
 
-# Save this simple pipeline to a NEW file
-joblib.dump(simple_pipeline, 'simple_model.joblib')
+st.title("Original Model Test")
 
-print("Simple test model saved to simple_model.joblib")
+try:
+    # Now, try to load your original, complex model
+    original_model = joblib.load('Modle_Pipeline.joblib') # Make sure filename is correct
+    st.success("Success! The original pipeline loaded correctly.")
+    st.write(original_model)
+except Exception as e:
+    st.error("Failed to load the original pipeline.")
+    st.exception(e)
