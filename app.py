@@ -9,9 +9,8 @@ st.title('Multivariate Model')
 
 def multi_model():
     pipeline = joblib.load('Multi_Modle_Pipeline.joblib')
-    with open('training_columns.json', 'r') as f:
-        columns = json.load(f)
-    return pipeline, columns
+    
+    return pipeline
 
 multi_model_pipeline = multi_model()
 
