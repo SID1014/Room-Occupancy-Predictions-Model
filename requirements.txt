@@ -3,3 +3,4 @@ joblib
 scikit-learn
 imbalanced-learn
 numpy
+json
