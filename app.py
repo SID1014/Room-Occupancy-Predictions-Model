@@ -8,7 +8,7 @@ st.header('Room Occupacy Detection')
 st.title('Multivariate Model')
 
 def multi_model():
-    pipeline = joblib.load('Modle_Pipeline.joblib')
+    pipeline = joblib.load('Multi_Modle_Pipeline.joblib')
     return pipeline
 
 multi_model_pipeline = multi_model()
