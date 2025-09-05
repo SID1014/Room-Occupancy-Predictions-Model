@@ -5,14 +5,23 @@ import numpy as np
 import json
 
 st.header('Room Occupacy Detection')
-st.title('Multivariate Model')
+
+
+
+model_to_use =  st.selectbox("Which Model to Use",['Multivariate','Binary'])
+
+
+st.title(f'{model_to_use} Model')
 
 def multi_model():
     pipeline = joblib.load('Multi_Modle_Pipeline.joblib')
-    
+    return pipeline
+def bin_model():
+    pipeline = joblib.load('Binary_Model_Pipeline.joblib')
     return pipeline
 
 multi_model_pipeline = multi_model()
+bin_model_pipeline = bin_model()
 
 s1_temp = st.slider("S1 Temperature (°C)", 20.0, 30.0, 25.0)
 s1_light = st.slider("S1 Light (Lux)", 0, 500, 150)
@@ -55,10 +64,19 @@ def feture_engineering():
        'S1_Sound_lag', 'S5_CO2_window']
     return input_df[columns]
 
-def final_predictions(custom_input):
-    prediction = multi_model_pipeline.predict(custom_input)
+def final_predictions(custom_input,model):
+    prediction = model.predict(custom_input)
     return prediction
 
-if st.button('Predict Results'):
-    predictions = final_predictions(feture_engineering())
-    st.success(f"Occording to our model there are {predictions[0]} Occupants in room.")
+if model_to_use == 'Multivariate':
+    if st.button('Predict Results'):
+        predictions = final_predictions(feture_engineering(),multi_model_pipeline)
+        st.success(f"Occording to our model there are {predictions[0]} Occupants in room.")
+else:
+    if st.button('Predict Results'):
+        predictions = final_predictions(feture_engineering(),bin_model_pipeline)
+        if predictions[0] == 1:
+            result = 'Present'
+        else :
+            result = 'absent'
+        st.success(f"Occording to our model Occupants are {result} in room.")
