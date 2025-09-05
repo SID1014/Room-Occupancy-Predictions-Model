@@ -98,7 +98,7 @@ with tab_insights:
     " We also added the some lag and rolling window feature so that model can learn from the past as this is a time series data model should learn from past also.\n" \
     "This is the correaltion matrix of dataset after feature Engineering")
 
-    st.image('Project Insight images\dataset-correlation-matrix.png',caption='Dataset Correlation Matrix')
+    st.image('Project Insight images/dataset-correlation-matrix.png',caption='Dataset Correlation Matrix')
 
     st.text('Wecan see that some features are highly correlated while some are not.We drop to features here who ' \
     'which represented some sensor data which was correlated below 0.5.We do retain engineered as even if they are not highly correlated they' \
@@ -109,7 +109,7 @@ with tab_insights:
 
     st.title('Preprocessing :')
     st.text('Before moving further we take a look of various scales of data.')
-    st.image('Project Insight images\dataset-histograms.png',caption='Histograms of various features.(count vs Scale)')
+    st.image('Project Insight images/dataset-histograms.png',caption='Histograms of various features.(count vs Scale)')
     st.text('It is clear that some features are binary while most of them are continuos.Also we can clearly see that' \
     ' some features are on a very different scale than others thats because this is a sensor data so this data is in different units' \
     '. This can affect our models predictions so we use standard scaler and create a preprocesssing pipeline.')
@@ -148,11 +148,11 @@ with tab_insights:
     st.text('We find that RandomForest is doing better so we select it as our final model.\n Following are the importances placed by' \
     ' RandomForestClassifier on the features.')
 
-    st.image('Project Insight images\Top-15-features.png',caption='Top 15 features from RandomForestClassifier')
+    st.image('Project Insight images/Top-15-features.png',caption='Top 15 features from RandomForestClassifier')
     st.text('We can see that those engineered time series features do have a impact on our model')
 
     st.title('The Problem:')
-    st.image('Project Insight images\multivariate-model-cm.png',caption='The confusion Matrix of Multivariate Model on testing data')
+    st.image('Project Insight images/multivariate-model-cm.png',caption='The confusion Matrix of Multivariate Model on testing data')
     st.text('We can see that there is no example of 1 person present in room in testing data.\n' \
     'Tha data was in a time series format so this is normal but we can see that due to a huge class imbalance model seems to be' \
     'tilted towards class zero.')
@@ -162,7 +162,7 @@ with tab_insights:
     st.text("To deal with this specific problem and considering that our dataset comes from a IoT system' \
     'Designed to switch lights on and off we can make this multivariate model into a binary model.We made the target class as a binary class that is if absent 0 else 1.\n" \
     "Then we again used RandomForestClassifier in our Pipeline. This time also we used random search CV to hypertune parameters.")
-    st.image('Project Insight images\\binary-model-cm.png',caption='Confusion Matrix of Binary Classifier')
+    st.image('Project Insight images/binary-model-cm.png',caption='Confusion Matrix of Binary Classifier')
     
     baseline_scores = {
     'Model': ['RandomForest'],
